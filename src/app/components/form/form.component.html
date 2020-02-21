@@ -5,11 +5,60 @@
         <h5 class="card-header">Featured</h5>
         <div class="card-body">
           <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="select">Example select</label>
+              <select
+                class="form-control"
+                id="select"
+                formControlName="movie"
+                required
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <div
+                *ngIf="movie.invalid && movie.touched"
+                class="alert alert-danger"
+              >
+                <div *ngIf="movie.errors.required">
+                  Name is required.
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <label>
+                Movie:
+                <input
+                  id="movie"
+                  class="form-control"
+                  formControlName="movie"
+                  required
+                />
+              </label>
+              <div
+                *ngIf="movie.invalid && (movie.dirty || movie.touched)"
+                class="alert alert-danger"
+              >
+                <div *ngIf="movie.errors.required">
+                  Name is required.
+                </div>
+              </div>
+            </div> -->
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="exampleForm.invalid"
+            >
+              OK
+            </button>
+            <button class="btn btn-secondary" (click)="enable()">ENABLE</button>
+          </form>
+          <h1>{{ movie.value }}</h1>
+          <div></div>
         </div>
       </div>
     </div>
